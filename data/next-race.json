@@ -1,0 +1,35 @@
+{
+  "weekend": {
+    "season": 2026,
+    "raceName": "Emilia Romagna Grand Prix",
+    "circuitName": "Autodromo Enzo e Dino Ferrari",
+    "locality": "Imola",
+    "country": "Italy",
+    "startsAt": "2026-05-17T13:00:00Z"
+  },
+  "record": {
+    "races": 31,
+    "wins": 8,
+    "podiums": 24
+  },
+  "forecast": [
+    {
+      "date": "2026-05-15",
+      "tempMax": 22,
+      "tempMin": 12,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-05-16",
+      "tempMax": 24,
+      "tempMin": 14,
+      "rainMm": 0
+    },
+    {
+      "date": "2026-05-17",
+      "tempMax": 23,
+      "tempMin": 13,
+      "rainMm": 0
+    }
+  ]
+}

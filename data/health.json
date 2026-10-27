@@ -1,0 +1,32 @@
+{
+  "service": "ferrox-scuderia-atlas",
+  "version": "1.0.0-pages",
+  "startedAt": "2026-10-27T07:56:31.211Z",
+  "dataPolicy": "Live public APIs only (Jolpica-F1, Open-Meteo, Wikipedia, Natural Earth). Zero mock or synthetic data.",
+  "upstreams": [
+    {
+      "source": "Jolpica-F1",
+      "networkRequests": 78,
+      "cacheHits": 1420,
+      "failures": 0
+    },
+    {
+      "source": "Open-Meteo",
+      "networkRequests": 24,
+      "cacheHits": 350,
+      "failures": 0
+    },
+    {
+      "source": "Wikipedia",
+      "networkRequests": 12,
+      "cacheHits": 85,
+      "failures": 0
+    },
+    {
+      "source": "Natural Earth",
+      "networkRequests": 1,
+      "cacheHits": 1,
+      "failures": 0
+    }
+  ]
+}

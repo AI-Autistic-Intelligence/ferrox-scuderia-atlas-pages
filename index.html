@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Scuderia Atlas · Ferrari in Formula 1, 1950 → today, from public data</title>
+  <meta name="description" content="Every Formula 1 race Ferrari has entered since 1950 – wins, titles, drivers, circuits, the current championship and the next Grand Prix – computed live from public APIs. No mock or synthetic data.">
+  <meta name="theme-color" content="#0b0b0d">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="Scuderia Atlas home">
+      <img src="./favicon.svg" alt="" width="30" height="30">
+      <span>SCUDERIA <b>ATLAS</b></span>
+    </a>
+    <nav aria-label="Sections">
+      <a href="#heritage">Heritage</a>
+      <a href="#seasons">Seasons</a>
+      <a href="#drivers">Drivers</a>
+      <a href="#circuits">Circuits</a>
+      <a href="#championship">Championship</a>
+      <a href="#next-race">Next race</a>
+      <a href="#market" id="nav-market">Ferrari N.V.</a>
+      <a href="#sources">Sources</a>
+    </nav>
+    <div class="live-pill" id="data-pill" title="Dataset status"><i></i><span>connecting…</span></div>
+  </header>
+
+  <div class="warmup" id="warmup" role="status" aria-live="polite">
+    <div class="warmup-card">
+      <div class="eyebrow">Building the archive from public data</div>
+      <div class="warmup-phase" id="warmup-phase">Contacting Jolpica-F1…</div>
+      <div class="bar"><div id="warmup-bar"></div></div>
+      <div class="muted small" id="warmup-count"></div>
+      <p class="muted small">First start downloads every Ferrari result since 1950 plus each season's championship tables while respecting the API's rate limit (about one minute). Finished seasons are then cached on disk forever.</p>
+    </div>
+  </div>
+
+  <main id="top">
+    <section class="hero" id="heritage">
+      <div class="hero-text">
+        <div class="eyebrow">Formula 1 World Championship · since Monaco 1950</div>
+        <h1>Ferrari, <em>race by race</em>.</h1>
+        <p class="lede">Every Grand Prix the Scuderia has entered, every title and every driver – <strong>computed live</strong> from public data sources. Nothing on this page is hand-typed, mocked or simulated.</p>
+        <div class="hero-meta" id="hero-meta"></div>
+      </div>
+      <div class="counters" id="counters" aria-label="All-time totals">
+        <div class="counter skeleton"></div><div class="counter skeleton"></div><div class="counter skeleton"></div>
+        <div class="counter skeleton"></div><div class="counter skeleton"></div><div class="counter skeleton"></div>
+      </div>
+    </section>
+
+    <section class="milestones" id="milestones" aria-label="Milestones"></section>
+
+    <section class="panel" id="seasons">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">77 seasons at a glance</div>
+          <h2>Wins per season &amp; world titles</h2>
+        </div>
+        <div class="legend">
+          <span><i class="lg-bar"></i>Wins</span>
+          <span><i class="lg-crown">♛</i>Constructors' title</span>
+          <span><i class="lg-star">●</i>Drivers' title</span>
+        </div>
+      </div>
+      <div id="timeline" class="skeleton tall"></div>
+      <div class="season-detail" id="season-detail"></div>
+      <div class="titles-grid">
+        <div>
+          <h3>Constructors' Championships <span class="count" id="ctitles-count"></span></h3>
+          <div class="chips" id="ctitles"></div>
+        </div>
+        <div>
+          <h3>Drivers' Championships with Ferrari <span class="count" id="dtitles-count"></span></h3>
+          <div class="chips" id="dtitles"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel split" id="on-this-day-panel">
+      <div>
+        <div class="eyebrow" id="otd-date">On this day</div>
+        <h2>On this day in Ferrari history</h2>
+        <div id="on-this-day" class="otd"></div>
+      </div>
+      <div>
+        <div class="eyebrow">Wins by decade</div>
+        <h2>The eras of the Scuderia</h2>
+        <div id="decades" class="decades"></div>
+      </div>
+    </section>
+
+    <section class="panel" id="drivers">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Hall of fame · biographies from Wikipedia</div>
+          <h2>The drivers who raced in red</h2>
+        </div>
+        <div class="seg" role="tablist" aria-label="Sort drivers">
+          <button class="active" data-sort="wins" id="sort-wins">Wins</button>
+          <button data-sort="starts" id="sort-starts">Starts</button>
+          <button data-sort="podiums" id="sort-podiums">Podiums</button>
+          <button data-sort="points" id="sort-points">Points</button>
+        </div>
+      </div>
+      <div class="hall" id="hall"></div>
+      <details class="all-drivers">
+        <summary id="all-drivers-toggle">All Ferrari drivers</summary>
+        <div id="drivers-table"></div>
+      </details>
+    </section>
+
+    <section class="panel" id="circuits">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Natural Earth basemap · bubble size = races, glow = wins</div>
+          <h2>Where the Scuderia raced</h2>
+        </div>
+      </div>
+      <div class="map-layout">
+        <div id="world" class="skeleton tall"></div>
+        <aside class="circuit-panel" id="circuit-panel">
+          <p class="muted">Select a circuit on the map to open its Ferrari history and the race-day weather of recent editions (ERA5 reanalysis).</p>
+          <div id="circuit-top"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="panel" id="championship">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow" id="season-eyebrow">Current season</div>
+          <h2>The constructors' points race</h2>
+        </div>
+        <div class="legend" id="points-legend"></div>
+      </div>
+      <div class="split wide-left">
+        <div id="points-chart" class="skeleton tall"></div>
+        <div id="standings"></div>
+      </div>
+      <h3>Ferrari, round by round</h3>
+      <div class="rounds" id="ferrari-rounds"></div>
+    </section>
+
+    <section class="panel" id="next-race">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Race briefing</div>
+          <h2 id="next-title">Next Grand Prix</h2>
+        </div>
+        <div class="countdown" id="countdown" aria-live="off"></div>
+      </div>
+      <div class="briefing">
+        <div class="card" id="next-sessions"></div>
+        <div class="card" id="next-forecast"></div>
+        <div class="card" id="next-history"></div>
+      </div>
+      <div class="card" id="next-climate"></div>
+    </section>
+
+    <section class="panel" id="market">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Ferrari N.V. · NYSE: RACE · daily closes</div>
+          <h2>Racing results &amp; the share price</h2>
+        </div>
+        <div class="kpis-inline" id="market-kpis"></div>
+      </div>
+      <div id="market-chart" class="skeleton tall"></div>
+      <div id="market-stats"></div>
+      <p class="muted small">Weekend reaction = last close before race day vs first close after it. Shown for curiosity: correlation is not causation and a weekend's move reflects the whole market. Quotes come from Yahoo Finance's public chart endpoint (unofficial) and may be delayed; this is not investment advice.</p>
+    </section>
+
+    <section class="panel sources" id="sources">
+      <div class="eyebrow">Transparency</div>
+      <h2>Where every number comes from</h2>
+      <div class="source-grid" id="source-grid"></div>
+      <p class="muted small">Poles are counted as starts from grid slot 1 (qualifying data is only published from 2003). Fastest laps are published from 2004 onwards. Privateer Ferrari entries of the 1950s are included, as in the source database. Race-day weather is ERA5 reanalysis on a ~25 km grid around the circuit, not a trackside measurement.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div>Data: <a href="https://github.com/jolpica/jolpica-f1" rel="noopener">Jolpica-F1</a> (Ergast-compatible) · <a href="https://open-meteo.com" rel="noopener">Open-Meteo</a> (CC BY 4.0) · <a href="https://www.wikipedia.org" rel="noopener">Wikipedia</a> (CC BY-SA 4.0) · <a href="https://www.naturalearthdata.com" rel="noopener">Natural Earth</a> (public domain) · Yahoo Finance (unofficial).</div>
+    <div>Independent portfolio project – not affiliated with, endorsed by or connected to Ferrari S.p.A., Ferrari N.V., Scuderia Ferrari or Formula 1.</div>
+  </footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-card">
+      <button class="close" id="modal-close" aria-label="Close">×</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+</body>
+</html>

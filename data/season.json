@@ -1,0 +1,117 @@
+{
+  "season": 2026,
+  "standings": [
+    {
+      "constructorId": "mclaren",
+      "name": "McLaren",
+      "points": 593,
+      "position": 1
+    },
+    {
+      "constructorId": "ferrari",
+      "name": "Ferrari",
+      "points": 557,
+      "position": 2
+    },
+    {
+      "constructorId": "red_bull",
+      "name": "Red Bull Racing",
+      "points": 544,
+      "position": 3
+    },
+    {
+      "constructorId": "mercedes",
+      "name": "Mercedes",
+      "points": 382,
+      "position": 4
+    },
+    {
+      "constructorId": "aston_martin",
+      "name": "Aston Martin",
+      "points": 86,
+      "position": 5
+    }
+  ],
+  "pointsRace": {
+    "rounds": [
+      {
+        "round": 1,
+        "raceName": "Bahrain GP",
+        "cumulativePoints": {
+          "mclaren": 28,
+          "ferrari": 27,
+          "red_bull": 44,
+          "mercedes": 16
+        }
+      },
+      {
+        "round": 5,
+        "raceName": "Monaco GP",
+        "cumulativePoints": {
+          "mclaren": 184,
+          "ferrari": 252,
+          "red_bull": 276,
+          "mercedes": 96
+        }
+      },
+      {
+        "round": 10,
+        "raceName": "British GP",
+        "cumulativePoints": {
+          "mclaren": 295,
+          "ferrari": 337,
+          "red_bull": 373,
+          "mercedes": 221
+        }
+      },
+      {
+        "round": 16,
+        "raceName": "Italian GP",
+        "cumulativePoints": {
+          "mclaren": 438,
+          "ferrari": 407,
+          "red_bull": 446,
+          "mercedes": 292
+        }
+      },
+      {
+        "round": 19,
+        "raceName": "United States GP",
+        "cumulativePoints": {
+          "mclaren": 544,
+          "ferrari": 496,
+          "red_bull": 504,
+          "mercedes": 344
+        }
+      },
+      {
+        "round": 24,
+        "raceName": "Abu Dhabi GP",
+        "cumulativePoints": {
+          "mclaren": 593,
+          "ferrari": 557,
+          "red_bull": 544,
+          "mercedes": 382
+        }
+      }
+    ],
+    "constructors": [
+      {
+        "constructorId": "mclaren",
+        "name": "McLaren"
+      },
+      {
+        "constructorId": "ferrari",
+        "name": "Ferrari"
+      },
+      {
+        "constructorId": "red_bull",
+        "name": "Red Bull Racing"
+      },
+      {
+        "constructorId": "mercedes",
+        "name": "Mercedes"
+      }
+    ]
+  }
+}

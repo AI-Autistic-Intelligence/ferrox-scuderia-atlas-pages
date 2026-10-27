@@ -1,0 +1,47 @@
+{
+  "symbol": "RACE",
+  "currency": "USD",
+  "latest": {
+    "date": "2026-10-24",
+    "close": 442.85
+  },
+  "points": [
+    {
+      "x": 1,
+      "y": 395
+    },
+    {
+      "x": 50,
+      "y": 410
+    },
+    {
+      "x": 100,
+      "y": 435
+    },
+    {
+      "x": 150,
+      "y": 420
+    },
+    {
+      "x": 200,
+      "y": 442.85
+    }
+  ],
+  "reactions": [
+    {
+      "raceName": "Monza",
+      "deltaPercent": 2.4,
+      "outcome": "win"
+    },
+    {
+      "raceName": "Austin",
+      "deltaPercent": 1.8,
+      "outcome": "1-2"
+    },
+    {
+      "raceName": "Mexico",
+      "deltaPercent": 2.1,
+      "outcome": "win"
+    }
+  ]
+}
